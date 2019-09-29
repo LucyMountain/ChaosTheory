@@ -16,9 +16,9 @@ x = 0.25
 
 # lists to store values of t and x
 t, xdata = [], []
-for i in range(nPoints):
+for j in range(nPoints):
     # Store current values
-    t.append(i)
+    t.append(j)
     xdata.append(x)
 
     # Calculate new values
@@ -33,21 +33,19 @@ def initLogisticMap():
 
 
 # animation function for time series
-def animateLogisticMap(index):
-    line.set_data(t[:index], xdata[:index])
+def animateLogisticMap(i):
+    line.set_data(t[:i], xdata[:i])
     return line,
 
 
 # Plot setup - set the axes to be 1.25x the largest value so we fit the plot
 plt.style.use('dark_background')
 fig = plt.figure()
+plt.axis('on')
 tMax = max(t)
 xMax = max(xdata)
 
-# displaying the axis details 
-plt.axis('on')
-
-# call the animator - there are 3 possible plots
+# Call the animator
 plt.title('Logistic map evolution')
 ax = plt.axes(xlim=(0, tMax), ylim=(0, xMax * 1.25))
 animatedPlot = animation.FuncAnimation(fig, animateLogisticMap, init_func=initLogisticMap,
