@@ -4,32 +4,31 @@
 #
 # Art Mountain 2019
 
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.widgets import Slider
 
 # Definition of parameters
 nPoints = 100
-kMin = 1
+kMin = 0
 kMax = 4
-k = 3.5
+k = 1.5
 
 # Starting value
-xInit = 0.25
+xInitOffset = 0.1
 
 # lists to store values of t and x
-t, xdata = [], []
-
+t = np.linspace(0, nPoints, num=nPoints+1, endpoint=True)
+xdata = np.zeros(nPoints)
 
 def setUpData():
     global t, xdata, k
-    t = []
-    xdata = []
-    x = xInit
+    # Start close to the fixed point
+    x = max(0.3, min(0.9, 1 - 1/k - xInitOffset))
     for j in range(nPoints):
         # Store current values
-        t.append(j)
-        xdata.append(x)
+        xdata[j] = x
 
         # Calculate new values
         x = k * x * (1 - x)
@@ -63,26 +62,21 @@ plt.title('Logistic map evolution')
 
 # Slider for k value
 axcolor = 'lightgoldenrodyellow'
-axSlider = plt.axes([0.15, 0.05, 0.65, 0.03], facecolor=axcolor)
+axSlider = plt.axes((0.15, 0.05, 0.65, 0.03), facecolor=axcolor)
 kSlider = Slider(axSlider, 'k Value', kMin, kMax, valinit=k, valstep=(kMax - kMin) / 1000)
 
 
 def update(val):
     global k
     k = kSlider.val
-    fig.canvas.draw_idle()
-    x = xInit
-    for j in range(nPoints):
-        # Store current values then calculate new values
-        xdata[j] = x
-        x = k * x * (1 - x)
+    setUpData()
     fig.canvas.draw_idle()
 
 
 kSlider.on_changed(update)
 
 # Call the animator
-axes = plt.axes(xlim=(0, tMax), ylim=(0, xMax * 1.25))
+axes = plt.axes(xlim=(0, tMax), ylim=(0, max(1, xMax * 1.25)))
 animatedPlot = animation.FuncAnimation(fig, animateLogisticMap, init_func=initLogisticMap,
                                        frames=nPoints, interval=10, blit=True, repeat=True)
 
