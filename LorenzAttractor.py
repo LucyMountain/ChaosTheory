@@ -11,7 +11,7 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
 
-nPoints = 10000
+nPoints = 2500
 
 # Definition of parameters
 a = 10
@@ -79,5 +79,5 @@ anim = animation.FuncAnimation(fig, animatePhaseSpace, init_func=initPhaseSpace,
 line, = ax.plot([], [], lw=2)
 plt.show()
 
-# Uncomment to save the animation as mp4 video file
-# anim.save('LorenzAttractor.html',writer='imagemagick')
+# Uncomment to save the animation as gif video file
+#anim.save('D:/LorenzAttractor.gif', writer=animation.PillowWriter(fps=20))

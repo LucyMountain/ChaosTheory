@@ -83,5 +83,5 @@ animatedPlot = animation.FuncAnimation(fig, animateLogisticMap, init_func=initLo
 line, = axes.plot([], [], lw=2)
 plt.show()
 
-# Uncomment to save the animation as mp4 video file
-# animatedPlot.save('logisticMap.html',writer='imagemagick')
+# Uncomment to save the animation as gif video file
+#animatedPlot.save('D:/LogisticMap1.gif', writer=animation.PillowWriter(fps=20))
