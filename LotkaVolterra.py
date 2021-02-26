@@ -17,7 +17,7 @@ a = 1
 b = 1
 c = 2
 d = 1
-timestep = 0.01
+timestep = 0.05
 ee = -0.001
 
 # Starting values
