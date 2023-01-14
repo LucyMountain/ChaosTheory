@@ -6,8 +6,9 @@ import numpy
 x_coord = []
 y_coord = []
 
-for k in numpy.arange(2.5, 4, 1e-3):
-    x = 1 - 1 / k + 1e-7
+for k in numpy.arange(-4, 4, 1e-3):
+#    x = 1 - 1 / k + 1e-7
+    x = 0.5
     for i in range(1000):
         x = k * x * (1 - x)
     for i in range(500):
